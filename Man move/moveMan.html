@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<style>
+	table{
+		height: 150px;	
+		width: 150px;
+	}
+
+	img {
+		display: block;
+		position: absolute;
+	}
+
+	.black{
+		background-color: black;
+		cursor: pointer;
+	}
+	</style>
+	<body>
+		<table>
+			<tr>
+				<td></td>
+				<td class="black" id="top"></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="black" id="left"></td>
+				<td></td>
+				<td class="black" id="right"></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td class="black" id="down"></td>
+				<td></td>
+			</tr>
+		</table>
+
+		<img id="man" src="images.jpg" alt="man" style="top:240px;left:500px;">
+
+	</body>
+	<script>
+		document.getElementById('top').onclick=function(){
+			document.getElementById('man').style.transform="none";
+			document.getElementById('man').style.top = parseInt(document.getElementById('man').style.top)-10+"px";
+		}
+		document.getElementById('down').onclick=function(){
+			document.getElementById('man').style.transform="rotate(180deg)";
+			document.getElementById('man').style.top = parseInt(document.getElementById('man').style.top)+10+"px";
+		}
+		document.getElementById('left').onclick=function(){
+			document.getElementById('man').style.transform="rotate(-90deg)";
+			document.getElementById('man').style.left = parseInt(document.getElementById('man').style.left)-10+"px";
+		}
+		document.getElementById('right').onclick=function(){
+			document.getElementById('man').style.transform="rotate(90deg)";
+			document.getElementById('man').style.left = parseInt(document.getElementById('man').style.left)+10+"px";
+		}
+
+	</script>
+</html>

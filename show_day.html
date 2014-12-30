@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+</style>
+<script>
+	window.onload = function() {
+		var mainForm = document.forms.main;
+		var daysArr = ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', 'Пятниця', 'Субота'];
+		mainForm.show.onclick = function() {
+			var temp = new Date(mainForm.year.value+'/'+mainForm.month.value+'/'+mainForm.day.value);
+			alert(daysArr[temp.getDay()]);
+		}
+	}
+
+</script>
+</head>
+<body>
+<form name="main">
+	<p>День народження (1-31) : <input type="text" name="day" value=""/></p>
+	<p>Місяць в якому народилися (1-12): <input type="text" name="month" value=""/></p>
+	<p>Рік народження: <input type="text" name="year" value=""/></p>
+	<input type="button" name="show" value="Показати день тижня" />
+</form>
+</body>
+</html> 

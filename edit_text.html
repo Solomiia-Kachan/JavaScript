@@ -1,0 +1,297 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+	body {
+		background-color: peachpuff;
+	}
+	textarea {
+		margin: 10px;
+		width: 90%;
+		height: 120px;
+	}
+	td{
+		border:1px solid black;
+		height:20px;
+		width:20px;
+    	cursor: pointer;
+	}
+	.mainDiv {
+		min-height: 200px;
+		padding: 10px;
+		width: 370px;
+		border: solid black 1px;
+		margin: 0 auto;
+		background-color: white;
+		position: relative;
+	}
+	.forms {
+		display: none;
+		margin-left: 10px;
+	}
+	.nav {
+		padding: 1% 0 1% 42%;
+	}
+	.buttonStyle {
+		margin-left: 17px;
+	}
+	.buttonSave {
+		margin: 10px;
+	}
+	#ColorTable {
+		display:none;
+		position: absolute;
+		bottom: 50px;
+		left: 120px;
+	} 
+
+</style>
+
+<script>
+	window.onload=function(){
+		var NavForm=document.forms.NavForm;
+		var EditForm=document.forms.EditForm;
+		var ViewDiv = document.getElementById('ViewDiv');
+		var EditArea = document.getElementById('EditArea');
+		var AddForm = document.forms.AddForm;
+		var TableForm = document.forms.TableForm;
+		var ListForm = document.forms.ListForm;
+		var StyleForm = document.forms.StyleForm;
+		var ColorTable = document.getElementById('ColorTable');
+
+		NavForm.edit.onclick=function() {
+			EditForm.style.display="block";
+			EditArea.value = ViewDiv.innerHTML;
+			TableForm.style.display="none";
+			AddForm.style.display="none";
+			ListForm.style.display="none";
+			StyleForm.style.display="none";
+			ColorTable.style.display = "none";
+		}
+		NavForm.style.onclick = function() {
+			StyleForm.style.display="block";
+			TableForm.style.display="none";
+			AddForm.style.display="none";
+			ListForm.style.display="none";
+			EditForm.style.display="none";
+			ColorTable.style.display = "none";
+		}
+
+		EditForm.save.onclick=function() {
+			ViewDiv.innerHTML=EditArea.value;
+		}
+		EditForm.add.onclick=function() {
+			EditForm.style.display="none";
+			AddForm.style.display="block";	
+			for(var j=0; j<document.AddForm.choose.length; j++) {
+					select[j].checked=false;
+			}
+		}
+
+		var select = document.AddForm.choose;
+		for(var i=0; i<select.length; i++){
+			select[i].onclick=function() {
+				for(var j=0; j<select.length; j++) {
+					if(select[j].checked) {
+						document.getElementById(select[j].value).style.display = "block"; 
+					}
+					else {document.getElementById(select[j].value).style.display = "none";
+					}
+				}
+			}
+		}
+		
+		TableForm.CreateTable.onclick = function() {
+				var tempTable='<table>';
+				var width = parseInt(TableForm.width.value);
+				var height = parseInt(TableForm.height.value);
+				var lineWidth = parseInt(TableForm.thin.value);
+				var lineType = TableForm.type.value;
+				var lineColor = TableForm.color.value;
+				for(var i=1; i<=parseInt(TableForm.row.value); i++) {
+					tempTable=tempTable+'<tr>';
+						for(var j=1; j<=parseInt(TableForm.col.value); j++) {
+							tempTable=tempTable+'<td style="width:'+width+'px;height:'+height+'px; border-width:'+lineWidth+'px; border-style:'+lineType+'; border-color:'+lineColor+';"></td>';
+							}
+					tempTable=tempTable+'</tr>';
+				} 
+					tempTable=tempTable+'</table>';
+		EditArea.value+=tempTable;	
+		AddForm.style.display="none";
+		EditForm.style.display="block";
+		TableForm.style.display="none";
+		ColorTable.style.display = "none";
+		
+		}
+
+		ListForm.CreateList.onclick = function() {
+			var ListType = ListForm.chooseListType.value;
+			var tempList = '<'+ListType+'>';
+			for (var i=1; i<=ListForm.numberList.value; i++) {
+				tempList+='<li>list Item</li>';
+			}
+			tempList+='</'+ListType+'>';
+			EditArea.value+=tempList;
+			AddForm.style.display="none";
+			EditForm.style.display="block";
+			ListForm.style.display="none";
+			ColorTable.style.display = "none";
+
+		}
+
+		var selectSize = document.StyleForm.chooseSize;
+		for(var i=0; i<selectSize.length; i++){
+			selectSize[i].onclick=function() {
+				for(var j=0; j<selectSize.length; j++) {
+					if(selectSize[j].checked) {
+						ViewDiv.style.fontSize = selectSize[j].value; 
+					}
+				}
+			}
+		}
+
+		StyleForm.font.onchange=function() { 
+			ViewDiv.style.fontFamily = StyleForm.font.value;
+		}
+
+		StyleForm.bold.onchange=function() {
+			if(StyleForm.bold.checked) {
+				ViewDiv.style.fontWeight = "bold";
+			}
+			else {
+				ViewDiv.style.fontWeight = "normal";
+			}
+		}
+		
+		StyleForm.italic.onchange=function() {
+			if (StyleForm.italic.checked) {
+				ViewDiv.style.fontStyle = "italic";
+			}
+			else {
+				ViewDiv.style.fontStyle = "normal";
+			}
+		}
+
+		StyleForm.FontColor.onclick = function() {
+			ColorTable.style.display = "block";
+			for(var i=0;i<9;i++){
+				document.getElementsByTagName('td')[i].onclick=function(){
+					ViewDiv.style.color=this.style.background;
+					ColorTable.style.display = "none";
+				}
+			}
+		}
+
+		StyleForm.BackgroundColor.onclick = function() {
+			ColorTable.style.display = "block";
+			for(var i=0;i<9;i++){
+				document.getElementsByTagName('td')[i].onclick=function(){
+					ViewDiv.style.background=this.style.background;
+					ColorTable.style.display = "none";
+				}
+			}
+		}
+
+	}
+</script>
+</head>
+<body>
+<div class="mainDiv" id="ViewDiv">
+	<p>First line</p>
+	<p>Second line</p>
+	<p>Third line</p>
+</div>
+
+<form name="NavForm" class="nav">
+	<input type="button" name="edit" value="Редагувати">
+	<input type="button" name="style" value="Стилізувати" class="buttonStyle">
+</form>
+
+<div class="mainDiv" id="EditDiv">
+<form class="forms" name="EditForm">
+	<textarea id="EditArea" name="area" value=""></textarea>
+	<input type="button" name="save" value="Зберегти" class="buttonSave">
+	<input type="button" name="add" value="Додати">
+</form>
+
+<form class="forms" name="AddForm">
+	<h2>Виберіть</h2>
+	<input type="radio" name="choose" value="TableForm" />Таблиця
+	<input type="radio" name="choose" value="ListForm" />Список
+</form>
+<form class="forms" id="TableForm" name="TableForm">
+	<p>Введіть рядки <input type="text" name="row" value="2"/></p>
+	<p>Введіть стовпці <input type="text" name="col" value="2"/></p>
+
+	<h3>Стилізуйте таблицю</h3>
+	<p>Ширина комірки <input type="text" name="width" value="20"/></p>
+	<p>Висота комірки <input type="text" name="height" value="20"/></p>
+		 
+	<p>Товщина лінії <input type="number" name="thin" value="3"/></p>
+	<p>Тип лінії <select name="type">
+		<option value="solid">Solid</option>
+		<option value="double">Double</option>
+		<option value="dotted">Dotted</option>
+		<option value="dashed">Dashed</option>
+		<option value="ridge">Ridge</option>
+		<option value="inset">Inset</option>
+		<option value="outset">Outset</option>
+		<option value="groove">Groove</option>
+	</select></p>
+	<p>Колір лінії <select name="color">
+		<option value="black" style="background-color:black;">Black</option>
+		<option value="red" style="background-color:red;">Red</option>
+		<option value="green" style="background-color:green;">Green</option>
+		<option value="blue" style="background-color:blue;">Blue</option>
+	</select></p>
+	<input type="button" name="CreateTable" value="Створити таблицю">
+</form>
+
+<form class="forms" id="ListForm" name="ListForm">
+	<p>Введіть к-сть елементів списку <input type="number" name="numberList" value="2"/></p>
+	<p>Список <input type="radio" name="chooseListType" value="ul" checked/>ul
+	<input type="radio" name="chooseListType" value="ol" />ol
+	</p>
+	<input type="button" name="CreateList" value="Створити список">
+</form>
+
+<form class="forms" name="StyleForm">
+	<p>Розмір тексту<input type="radio" name="chooseSize" value="12pt" />12pt
+	<input type="radio" name="chooseSize" value="14pt" />14pt
+	<input type="radio" name="chooseSize" value="16pt" />16pt
+	<input type="radio" name="chooseSize" value="18pt" />18pt
+	<input type="radio" name="chooseSize" value="20pt" />20pt</p>
+	<p>Лігатура <select name="font">
+		<option value="serif">Serif</option>
+		<option value="cursive">Cursive</option>
+		<option value="fantasy">Fantasy</option>
+		<option value="monospace">Monospace</option>
+	</select></p>
+	<p><input type="button" name="FontColor" value="Колір тексту"></p>
+	<p><input type="button" name="BackgroundColor" value="Колір фону"></p>
+	<input type="checkbox" name="bold">Жирний текст
+	<input type="checkbox" name="italic">Курсивний текст
+</form>
+<table id='ColorTable'>
+	<tr>
+		<td style='background:#0033CC'></td>
+		<td style='background:#0099CC'></td>
+		<td style='background:#00FFCC'></td>
+	</tr>
+	<tr>
+		<td style='background:#FF3300'></td>
+		<td style='background:#FF9900'></td>
+		<td style='background:#FFFF00'></td>
+	</tr>
+	<tr>
+		<td style='background:#006600'></td>
+		<td style='background:#009900'></td>
+		<td style='background:#00FF33'></td>
+	</tr>
+</table>
+	
+</div>
+
+</body>
+</html> 

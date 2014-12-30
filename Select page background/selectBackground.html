@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<style>
+	body{
+		background-size: cover;
+    	background-repeat: no-repeat;
+	}
+
+	table{
+		margin:auto;
+	}
+
+	h1{
+		cursor: pointer;
+	}
+
+	td{
+		border:1px solid black;
+		height:90px;
+		width:90px;
+    	background-size: cover;
+    	background-repeat: no-repeat;
+    	cursor: pointer;
+	}
+
+	#image{
+		display:none;
+	}
+	</style>
+</head>
+
+<body>
+<h1 id='hh1'>Кольори</h1>
+<h1 id='hh2'>Зображення</h1>
+
+<table id='color'>
+	<tr>
+		<td style='background-color:#0033CC'></td>
+		<td style='background-color:#0099CC'></td>
+		<td style='background-color:#00FFCC'></td>
+	</tr>
+	<tr>
+		<td style='background-color:#FF3300'></td>
+		<td style='background-color:#FF9900'></td>
+		<td style='background-color:#FFFF00'></td>
+	</tr>
+	<tr>
+		<td style='background-color:#006600'></td>
+		<td style='background-color:#009900'></td>
+		<td style='background-color:#00FF33'></td>
+	</tr>
+</table>
+<table id='image'>
+	<tr>
+		<td style='background-image:url(0KbgpRckriY.jpg)'></td>
+		<td style='background-image:url(d3wi6YCgy9I.jpg)'></td>
+		<td style='background-image:url(lKxDR9Nx2lI.jpg)'></td>
+	</tr>
+	<tr>
+		<td style='background-image:url(mWsmL0foC0w.jpg)'></td>
+		<td style='background-image:url(pfRqTxUsN5o.jpg)'></td>
+		<td style='background-image:url(S3IMo5dy9N4.jpg)'></td>
+	</tr>
+	<tr>
+		<td style='background-image:url(x_9d67b964.jpg)'></td>
+		<td style='background-image:url(xpdlwM_UycA.jpg)'></td>
+		<td style='background-image:url(zkuFEaiLVMc.jpg)'></td>
+	</tr>
+</table>
+
+</body>
+
+<script>
+	for(var i=0;i<9;i++){
+		document.getElementsByTagName('td')[i].onclick=function(){
+			document.getElementsByTagName('body')[0].style.backgroundColor=this.style.backgroundColor;
+		}
+	}
+	for(var i=9;i<18;i++){
+		document.getElementsByTagName('td')[i].onclick=function(){
+			document.getElementsByTagName('body')[0].style.backgroundImage=this.style.backgroundImage;
+		}
+	}
+
+	document.getElementById('hh1').onclick=function(){
+		document.getElementById('image').style.display='none';
+		document.getElementById('color').style.display='table';
+	}
+
+	document.getElementById('hh2').onclick=function() {
+		document.getElementById('color').style.display='none';
+		document.getElementById('image').style.display='table';
+	}
+
+</script>
+</html>

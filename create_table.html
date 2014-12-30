@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<style>
+		td{
+			border: 1px solid black;
+		}
+	</style>
+
+<script>
+
+	var r=parseInt(prompt("Введіть к-сть рядків у таблиці:",""));
+	var c=parseInt(prompt("Введіть к-сть стовпців у таблиці:",""));
+	var h=parseInt(prompt("Введіть розмір комірки:",""));
+	var color1=prompt("Задайте 1-ий колір (англ.):","");
+	var color2=prompt("Задайте 2-ий колір (англ.):","");
+
+	document.write('<table>');
+		for(var i=1; i<=r; i++) {
+			document.write('<tr>');
+				for(var j=1; j<=c; j++) {
+					if((i+j)%2==0)document.write('<td style="background:'+color1+'; width:'+h+'px; height:'+h+'px;"></td>');
+					else document.write('<td style="background:'+color2+'; width:'+h+'px; height:'+h+'px;"></td>');
+				}
+			document.write('</tr>');
+		} 
+			
+	document.write('</table>'); 
+
+
+
+</script>
+</head>
+
+<body>
+</body>
+</html>

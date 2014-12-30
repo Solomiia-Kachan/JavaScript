@@ -1,0 +1,112 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+	li {
+		display:inline-block;
+		border: 1px solid black;
+		border-radius: 4px;
+	}
+
+	p {
+		margin-left: 40px;
+	}
+
+	.action li {
+		height: 30px;
+		width: 30px;
+		line-height: 30px;
+		text-align: center;
+		cursor: pointer;
+		margin-right: 10px;	
+	}
+
+	.button li {
+		height: 30px;
+		width: 90px;
+		line-height: 30px;
+		text-align: center;
+		cursor: pointer;		
+	}
+	
+	</style>
+	<body>
+	<ul class=action>
+		<li id="plus">+</li>
+		<li id='min'>-</li>
+		<li id='mult'>*</li>
+		<li id='div'>/</li>
+	</ul>
+	
+	<ul class='button'>
+		<li id='1st'>1st number</li>
+		<li id='2nd'>2nd number</li>
+		<li id='reset'>Reset</li>
+		<li id='res'>Result</li>
+	</ul>
+	
+	<p>RESULT:
+		<span id='1n'>0</span>
+		<span id='act'></span>
+		<span id='2n'>0</span>
+		<span id='equal'>=</span>
+		<span id='result'></span>
+	</p>
+	
+	</body>
+	<script>
+	var i=0;
+	var j=0;
+
+		document.getElementById('plus').onclick=function(){
+			document.getElementById('act').innerHTML=document.getElementById('plus').innerHTML;
+		}
+		document.getElementById('min').onclick=function(){
+			document.getElementById('act').innerHTML=document.getElementById('min').innerHTML;
+		}
+		document.getElementById('mult').onclick=function(){
+			document.getElementById('act').innerHTML=document.getElementById('mult').innerHTML;
+		}
+		document.getElementById('div').onclick=function(){
+			document.getElementById('act').innerHTML=document.getElementById('div').innerHTML;
+
+		}
+	
+	
+		document.getElementById('1st').onclick=function(){
+			document.getElementById('1n').innerHTML=++i;
+		}
+		document.getElementById('2nd').onclick=function(){
+			document.getElementById('2n').innerHTML=++j;
+		}
+		
+		document.getElementById('reset').onclick=function(){
+			document.getElementById('1n').innerHTML='0';
+			document.getElementById('2n').innerHTML='0';
+			document.getElementById('act').innerHTML='';
+			document.getElementById('result').innerHTML='';
+			i=0;
+			j=0;
+		}
+
+		
+		document.getElementById('res').onclick=function(){
+			var a = parseInt(document.getElementById('1n').innerHTML);
+			var b = parseInt(document.getElementById('2n').innerHTML);
+			var op = document.getElementById('act').innerHTML;
+				if(op == '+') {
+					document.getElementById('result').innerHTML=a+b;
+				}
+				else if(op == '-') {
+					document.getElementById('result').innerHTML=a-b;
+				}
+				else if(op == '*') {
+					document.getElementById('result').innerHTML=a*b;
+				}
+				else if(op == '/') {
+					document.getElementById('result').innerHTML=a/b;
+				}
+		}
+	</script>
+</html>
